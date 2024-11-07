@@ -1,0 +1,14 @@
+{
+  "user_id": 2,
+  "name": "",
+  "date_of_birth": "2024-10-22",
+  "gender_id": 0,
+  "marital_status_id": 0,
+  "occupation_id": 0,
+  "annual_income_id": 0,
+  "monthly_saving_capacity_id": 0,
+  "investment_amount_per_year_id": 0,
+  "regular_source_of_income": true,
+  "lock_in_period_accepted": true,
+  "investment_style": "string"
+}
