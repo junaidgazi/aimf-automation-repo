@@ -11,12 +11,11 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.json.JSONObject;
 import org.junit.Assert;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Properties;
+
 import static org.junit.Assert.assertEquals;
 
 public class fundStreetApi {
@@ -37,7 +36,9 @@ public class fundStreetApi {
     @Given("User get Token from JwtToken.properties file")
     public void setUserToken() {
         try {
-            jwtToken = Config.getJwtToken();
+            String content = new String(Files.readAllBytes(Paths.get("src/test/resources/JsonResources/JwtToken.json")));
+            JSONObject jsonObject = new JSONObject(content);
+            jwtToken = jsonObject.getString("TOKEN");
         } catch (Exception e) {
             Assert.fail("Error setting JWT token: " + e.getMessage());
         }
@@ -53,7 +54,6 @@ public class fundStreetApi {
             Assert.fail("Error setting request body: " + e.getMessage());
         }
     }
-
 
     @When("^User sends a (.*) request.")
     public void sendRequest(String requestType) {
@@ -90,39 +90,9 @@ public class fundStreetApi {
         }
     }
 
-
-    @And("Now user set token and otp")
-    public void setTokenRunTime() {
-        try {
-            if (response.getStatusCode() == 201) {
-                JsonPath jsonPath = response.jsonPath();
-                jwtToken = jsonPath.getString("data.token");
-                String otp = jsonPath.getString("data.otp");
-                System.out.println("Generated Token: " + jwtToken);
-                System.out.println("Generated OTP: " + otp);
-
-                // Create a JSON object to write OTP
-                JSONObject otpJson = new JSONObject();
-                otpJson.put("otp", otp);
-
-                // Write the JSON object to a file
-                try (FileWriter file = new FileWriter("src/test/resources/JsonResources/otp.json")) {
-                    file.write(otpJson.toString());
-                    file.flush();
-                } catch (IOException e) {
-                    Assert.fail("Error writing OTP to JSON file: " + e.getMessage());
-                }
-            } else {
-                Assert.fail("Unexpected status code: " + response.getStatusCode());
-            }
-        } catch (Exception e) {
-            Assert.fail("Error setting token and OTP: " + e.getMessage());
-        }
-    }
-
     @And("User set otp in json file")
     public void setOtp() {
-        if (response.getStatusCode() == 201) {
+        if (response.getStatusCode() == 200) {
             JsonPath jsonPath = response.jsonPath();
             String otp = jsonPath.getString("data.otp");
             System.out.println("Generated OTP: " + otp);
@@ -140,13 +110,14 @@ public class fundStreetApi {
     @And("user set token in permanent place in token.json file")
     public void setTokenPermanently() {
         String token = response.jsonPath().getString("data.token");
-        // Create a Properties object
-        Properties properties = new Properties();
-        properties.setProperty("JWT_TOKEN", token);
 
-        // Write to token.properties
-        try (FileOutputStream outputStream = new FileOutputStream("src/test/resources/configuration/JwtToken.properties")) {
-            properties.store(outputStream, null);
+        // Create a JSONObject and put the token
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("TOKEN", token);
+
+        // Write the JSON object to token.json file
+        try (FileWriter file = new FileWriter("src/test/resources/JsonResources/JwtToken.json")) {
+            file.write(jsonObject.toString(4)); // Pretty-print the JSON with indentation level 4
         } catch (IOException e) {
             e.printStackTrace();
         }
