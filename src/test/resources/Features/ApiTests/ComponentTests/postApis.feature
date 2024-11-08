@@ -1,5 +1,5 @@
 @API
-Feature: Fund Street all Post APIs Testing Automation
+Feature: Fund Street all Post APIs Testing Automation.
 
   Scenario Outline: Validate User Authentication Otp
     Given User set api <BaseUrl>.
@@ -7,10 +7,35 @@ Feature: Fund Street all Post APIs Testing Automation
     And User read request body from <JSON> file.
     When User sends a POST request.
     Then the response status should be <StatusCode>
+    And User wait 10 seconds Because user can not sent multiple request at a time
 
     Examples:
       | BaseUrl      | EndPoint           | JSON       | StatusCode |
       | API_BASE_URL | AUTHENTICATION_OTP | email.json | 202        |
+
+#  Scenario Outline: Validate Check Health
+#    Given User set api <BaseUrl>.
+#    Given User set api <EndPoint>.
+#    Given User get Token from JwtToken.properties file
+#    And User read request body from <JSON> file.
+#    When User sends a POST request.
+#    Then the response status should be <StatusCode>
+#
+#    Examples:
+#      | BaseUrl      | EndPoint     | JSON        | StatusCode |
+#      | API_BASE_URL | HEALTH_CHECK | string.json | 200        |
+
+  Scenario Outline: Validate Resend Otp
+    Given User set api <BaseUrl>.
+    Given User set api <EndPoint>.
+    And User read request body from <JSON> file.
+    When User sends a POST request.
+    Then the response status should be <StatusCode>
+    And User wait 10 seconds Because user can not sent multiple request at a time
+
+    Examples:
+      | BaseUrl      | EndPoint   | JSON       | StatusCode |
+      | API_BASE_URL | RESEND_OTP | email.json | 202        |
 
 
   Scenario Outline: Validate Forget Password
@@ -19,6 +44,7 @@ Feature: Fund Street all Post APIs Testing Automation
     And User read request body from <JSON> file.
     When User sends a POST request.
     Then the response status should be <StatusCode>
+    And User wait 10 seconds Because user can not sent multiple request at a time
 
     Examples:
       | BaseUrl      | EndPoint        | JSON       | StatusCode |
@@ -37,29 +63,6 @@ Feature: Fund Street all Post APIs Testing Automation
       | BaseUrl      | EndPoint      | JSON        | StatusCode |
       | API_BASE_URL | POPULATE_DATA | string.json | 200        |
 
-  Scenario Outline: Validate Resend Otp
-    Given User set api <BaseUrl>.
-    Given User set api <EndPoint>.
-    And User read request body from <JSON> file.
-    When User sends a POST request.
-    Then the response status should be <StatusCode>
-
-    Examples:
-      | BaseUrl      | EndPoint   | JSON       | StatusCode |
-      | API_BASE_URL | RESEND_OTP | email.json | 202        |
-
-
-  Scenario Outline: Validate Check Health
-    Given User set api <BaseUrl>.
-    Given User set api <EndPoint>.
-    Given User get Token from JwtToken.properties file
-    And User read request body from <JSON> file.
-    When User sends a POST request.
-    Then the response status should be <StatusCode>
-
-    Examples:
-      | BaseUrl      | EndPoint     | JSON        | StatusCode |
-      | API_BASE_URL | HEALTH_CHECK | string.json | 200        |
 
 
 #  Scenario Outline: Validate Read Mutual Funds

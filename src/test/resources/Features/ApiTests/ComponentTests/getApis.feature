@@ -31,6 +31,7 @@ Feature: Fund Street all Get API's Testing Automation
 #      | BaseUrl      | EndPoint    | StatusCode |
 #      | API_BASE_URL | RUN_COMMAND | 200        |
 
+
   Scenario Outline: Validate Get All Section
     Given User set api <BaseUrl>.
     Given User set api <EndPoint>.

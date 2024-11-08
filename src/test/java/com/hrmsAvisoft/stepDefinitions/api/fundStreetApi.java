@@ -161,4 +161,9 @@ public class fundStreetApi {
         }
     }
 
+    @And("User wait 10 seconds Because user can not sent multiple request at a time")
+    public void userWait() throws InterruptedException {
+        Thread.sleep(15000);
+    }
+
 }
