@@ -13,17 +13,17 @@ Feature: Fund Street all Post APIs Testing Automation.
       | BaseUrl      | EndPoint           | JSON       | StatusCode |
       | API_BASE_URL | AUTHENTICATION_OTP | email.json | 202        |
 
-#  Scenario Outline: Validate Check Health
-#    Given User set api <BaseUrl>.
-#    Given User set api <EndPoint>.
-#    Given User get Token from JwtToken.properties file
-#    And User read request body from <JSON> file.
-#    When User sends a POST request.
-#    Then the response status should be <StatusCode>
-#
-#    Examples:
-#      | BaseUrl      | EndPoint     | JSON        | StatusCode |
-#      | API_BASE_URL | HEALTH_CHECK | string.json | 200        |
+  Scenario Outline: Validate Check Health
+    Given User set api <BaseUrl>.
+    Given User set api <EndPoint>.
+    Given User get Token from JwtToken.properties file
+    And User read request body from <JSON> file.
+    When User sends a POST request.
+    Then the response status should be <StatusCode>
+
+    Examples:
+      | BaseUrl      | EndPoint     | JSON        | StatusCode |
+      | API_BASE_URL | HEALTH_CHECK | string.json | 200        |
 
   Scenario Outline: Validate Resend Otp
     Given User set api <BaseUrl>.
@@ -65,39 +65,39 @@ Feature: Fund Street all Post APIs Testing Automation.
 
 
 
-#  Scenario Outline: Validate Read Mutual Funds
-#    Given User set api <BaseUrl>.
-#    Given User set api <EndPoint>.
-#    And User read request body from <JSON> file.
-#    When User sends a POST request.
-#    Then the response status should be <StatusCode>
-#
-#    Examples:
-#      | BaseUrl      | EndPoint         | JSON                 | StatusCode |
-#      | API_BASE_URL | READ_MUTUAL_FUND | readMutualFunds.json | 200        |
+  Scenario Outline: Validate Read Mutual Funds
+    Given User set api <BaseUrl>.
+    Given User set api <EndPoint>.
+    And User read request body from <JSON> file.
+    When User sends a POST request.
+    Then the response status should be <StatusCode>
+
+    Examples:
+      | BaseUrl      | EndPoint         | JSON                 | StatusCode |
+      | API_BASE_URL | READ_MUTUAL_FUND | readMutualFunds.json | 200        |
 
 
-#  Scenario Outline: Validate Read Fund Data
-#    Given User set api <BaseUrl>.
-#    Given User set api <EndPoint>.
-#    And User read request body from <JSON> file.
-#    When User sends a POST request.
-#    Then the response status should be <StatusCode>
-#
-#    Examples:
-#      | BaseUrl      | EndPoint       | JSON              | StatusCode |
-#      | API_BASE_URL | READ_FUND_DATA | readFundData.json | 200        |
+  Scenario Outline: Validate Read Fund Data
+    Given User set api <BaseUrl>.
+    Given User set api <EndPoint>.
+    And User read request body from <JSON> file.
+    When User sends a POST request.
+    Then the response status should be <StatusCode>
 
-#  Scenario Outline: Validate Read Historical Data By Fund Id
-#    Given User set api <BaseUrl>.
-#    Given User set api <EndPoint>.
-#    And User read request body from <JSON> file.
-#    When User sends a POST request.
-#    Then the response status should be <StatusCode>
-#
-#    Examples:
-#      | BaseUrl      | EndPoint              | JSON                        | StatusCode |
-#      | API_BASE_URL | HISTORICAL_DATA_BY_ID | historicalDataByFundId.json | 200        |
+    Examples:
+      | BaseUrl      | EndPoint       | JSON              | StatusCode |
+      | API_BASE_URL | READ_FUND_DATA | readFundData.json | 200        |
+
+  Scenario Outline: Validate Read Historical Data By Fund Id
+    Given User set api <BaseUrl>.
+    Given User set api <EndPoint>.
+    And User read request body from <JSON> file.
+    When User sends a POST request.
+    Then the response status should be <StatusCode>
+
+    Examples:
+      | BaseUrl      | EndPoint              | JSON                        | StatusCode |
+      | API_BASE_URL | HISTORICAL_DATA_BY_ID | historicalDataByFundId.json | 200        |
 
 
 #  Not Working some issue in backend

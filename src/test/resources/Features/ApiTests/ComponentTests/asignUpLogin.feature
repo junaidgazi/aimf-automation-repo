@@ -40,17 +40,17 @@ Feature: Fund Street Sign Up and Login API Testing...
       | API_BASE_URL | USER_AUTHENTICATION | signUp.json | 200        |
 
 
-#  Scenario Outline: Validate successful Change Password
-#    Given User set api <BaseUrl>.
-#    Given User set api <EndPoint>.
-#    Given User get Token from JwtToken.properties file
-#    And User read request body from <JSON> file.
-#    When User sends a POST request.
-#    Then the response status should be <StatusCode>
-#
-#    Examples:
-#      | BaseUrl      | EndPoint        | JSON                | StatusCode |
-#      | API_BASE_URL | CHANGE_PASSWORD | changePassword.json | 200        |
+  Scenario Outline: Validate successful Change Password
+    Given User set api <BaseUrl>.
+    Given User set api <EndPoint>.
+    Given User get Token from JwtToken.properties file
+    And User read request body from <JSON> file.
+    When User sends a POST request.
+    Then the response status should be <StatusCode>
+
+    Examples:
+      | BaseUrl      | EndPoint        | JSON                | StatusCode |
+      | API_BASE_URL | CHANGE_PASSWORD | changePassword.json | 200        |
 
 
 
